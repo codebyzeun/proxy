@@ -69,18 +69,15 @@ class VisionAI:
         lower = np.array([0, 0, 200])
         upper = np.array([180, 30, 255])
 
-        # Create mask and apply it
         mask = cv2.inRange(hsv, lower, upper)
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
         mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
 
-        # Find contours
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-        # Draw rectangles around potential text areas
         for cnt in contours:
             area = cv2.contourArea(cnt)
-            if area > 100:  # Filter small contours
+            if area > 100:
                 x, y, w, h = cv2.boundingRect(cnt)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
@@ -88,7 +85,6 @@ class VisionAI:
 
     def describe_scene(self, frame):
         """Generate text description about what the AI sees"""
-        # Use connected text_ai to generate description if available
 
         if self.processing_mode == "face_detection":
             face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -100,10 +96,8 @@ class VisionAI:
             else:
                 seed_text = f"I see {len(faces)} faces in this image. They appear to be"
         else:
-            # Default seed text based on the current mode
             seed_text = f"The image I'm seeing is processed with {self.processing_mode} mode. I can see"
 
-        # Generate text description using the text generation model if available
         if self.text_ai and self.text_ai.model is not None:
             description = self.text_ai.generate_text(seed_text=seed_text, length=100, temperature=0.7)
             return description
@@ -175,7 +169,6 @@ class VisionAI:
                     (0, 255, 0),
                     2
                 )
-
                 if show_window:
                     cv2.imshow('AI Vision', display_frame)
 
@@ -194,17 +187,15 @@ class VisionAI:
                     self.processing_mode = modes[(current_index + 1) % len(modes)]
                     print(f"Switched to mode: {self.processing_mode}")
                 elif key == ord('s'):
-                    # Save current frame
                     timestamp = int(time.time())
                     filename = f"ai_vision_{timestamp}.jpg"
-                    if len(processed_frame.shape) == 2:  # If grayscale
+                    if len(processed_frame.shape) == 2:
                         save_frame = cv2.cvtColor(processed_frame, cv2.COLOR_GRAY2BGR)
                     else:
                         save_frame = processed_frame
                     cv2.imwrite(filename, save_frame)
                     print(f"Saved frame as {filename}")
                 elif key == ord('d'):
-                    # Generate a description on demand
                     description = self.describe_scene(frame)
                     print("\nAI Description:")
                     print(description)

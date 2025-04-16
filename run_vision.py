@@ -1,5 +1,3 @@
-# run_vision.py
-
 from text_generation import TextGenerationAI
 from vision_ai import VisionAI
 import argparse
@@ -22,12 +20,9 @@ def parse_arguments():
 
 if __name__ == "__main__":
     args = parse_arguments()
-
-    # Check if model directory exists
     model_dir = f"models/{args.model}"
     model_path = f"{model_dir}/model.keras"
 
-    # Initialize text generation AI
     text_ai = None
     if not args.no_text:
         print(f"Initializing Text Generation AI with model: {args.model}")
@@ -42,11 +37,9 @@ if __name__ == "__main__":
             print(f"Warning: Model not found at {model_path}")
             print("Text generation will be limited")
 
-    # Initialize vision AI
     vision_ai = VisionAI(text_ai=text_ai, camera_index=args.camera)
     vision_ai.processing_mode = args.mode
 
-    # Single capture mode
     if args.capture_only:
         output_file = args.output if args.output else f"ai_vision_capture.jpg"
         print(f"Capturing a single frame with mode: {args.mode}")
@@ -58,7 +51,6 @@ if __name__ == "__main__":
                 print("\nAI Description:")
                 print(description)
     else:
-        # Interactive mode
         print("Starting vision system...")
         print("Controls:")
         print("  'q' - Quit")
