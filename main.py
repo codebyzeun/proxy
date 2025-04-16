@@ -4,7 +4,7 @@ from text_generation import TextGenerationAI
 
 if __name__ == "__main__":
     # Create the AI
-    ai = TextGenerationAI(model_name="keras_rnn_model")
+    ai = TextGenerationAI(model_name="canta_rnn_model")
     try:
         with open("test_text.txt", "r", encoding="utf-8") as file:
             text_data = file.read()
