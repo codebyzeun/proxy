@@ -21,7 +21,7 @@ if __name__ == "__main__":
     generated_code = ai.generate_text(
         seed_text=seed,
         length=200,
-        temperature=0.3
+        temperature=0.7
     )
 
     print("\nGenerated Python Code:")
