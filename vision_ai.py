@@ -1,9 +1,6 @@
-# vision_ai.py
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from text_generation import TextGenerationAI
 import time
 import os
 
@@ -20,7 +17,7 @@ class VisionAI:
         self.text_ai = text_ai
         self.camera_index = camera_index
         self.camera = None
-        self.processing_mode = "normal"  # Default processing mode
+        self.processing_mode = "normal"
 
     def start_camera(self):
         """Initialize and start the camera"""
@@ -60,7 +57,6 @@ class VisionAI:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-        # Draw rectangles around faces
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
@@ -68,10 +64,8 @@ class VisionAI:
 
     def detect_text(self, frame):
         """Simple text detection (requires text to be highlighted)"""
-        # Convert to HSV for better color segmentation
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        # Define range for detecting white/light colored text
         lower = np.array([0, 0, 200])
         upper = np.array([180, 30, 255])
 
@@ -128,12 +122,10 @@ class VisionAI:
             print("Failed to capture image")
             return None
 
-        # Process the frame
         processed = self.process_frame(frame)
 
-        # Save if filename provided
         if filename:
-            if len(processed.shape) == 2:  # If grayscale
+            if len(processed.shape) == 2:
                 processed_color = cv2.cvtColor(processed, cv2.COLOR_GRAY2BGR)
                 cv2.imwrite(filename, processed_color)
             else:
@@ -168,12 +160,10 @@ class VisionAI:
                     print("Error: Failed to capture frame")
                     break
 
-                # Process the frame
                 processed_frame = self.process_frame(frame)
 
-                # Add mode text to frame
                 display_frame = processed_frame.copy()
-                if len(display_frame.shape) == 2:  # If grayscale
+                if len(display_frame.shape) == 2:
                     display_frame = cv2.cvtColor(display_frame, cv2.COLOR_GRAY2BGR)
 
                 cv2.putText(
@@ -189,19 +179,16 @@ class VisionAI:
                 if show_window:
                     cv2.imshow('AI Vision', display_frame)
 
-                # Generate text description periodically
-                if enable_text_generation and time.time() % 5 < 0.1:  # Every ~5 seconds
+                if enable_text_generation and time.time() % 5 < 0.1:
                     description = self.describe_scene(frame)
                     print("\nAI Description:")
                     print(description)
                     print("\nPress 'q' to quit, 'm' to change mode, 's' to save frame, 'd' to describe")
 
-                # Handle key presses
                 key = cv2.waitKey(1) & 0xFF
                 if key == ord('q'):
                     break
                 elif key == ord('m'):
-                    # Cycle through modes
                     modes = ["normal", "grayscale", "edges", "blur", "face_detection", "text_detection"]
                     current_index = modes.index(self.processing_mode)
                     self.processing_mode = modes[(current_index + 1) % len(modes)]
