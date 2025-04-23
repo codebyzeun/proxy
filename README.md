@@ -69,10 +69,12 @@ proxy/
 
     ```bash
     pip install -r requirements.txt # Preferred method, if available
+
     # OR, if you don't have a requirements.txt:
     pip install opencv-python tensorflow keras
+
     #  Install any other dependencies.  For example:
-    # pip install numpy  # If used
+    # pip install numpy 
     ```
 
     * **Note:** It's highly recommended to create a `requirements.txt` file to ensure consistent dependencies.  You can generate it using `pip freeze > requirements.txt` after installing the necessary packages in your virtual environment.
