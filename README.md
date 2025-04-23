@@ -12,7 +12,7 @@ Proxy is a versatile AI project developed using Python, leveraging the power of 
 * **Mood Detection:**
     * Analyzes visual input to detect the predominant mood or emotion expressed.
     * Supports processing of both still images and video streams.
-    * [Specify the moods/emotions that the model can detect (e.g., happy, sad, angry, neutral, surprise, fear).]
+    * happy, sad, angry, neutral, surprise, fear
 * **Character-Level RNN Text Generation:**
     * Generates text sequences, learning the structure and patterns of language at the character level.
     * Allows for generating text with varying styles and content, depending on the training data.
