@@ -69,10 +69,8 @@ proxy/
 
     ```bash
     pip install -r requirements.txt # Preferred method, if available
-
     # OR, if you don't have a requirements.txt:
     pip install opencv-python tensorflow keras
-
     #  Install any other dependencies.  For example:
     # pip install numpy 
     ```
