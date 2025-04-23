@@ -35,7 +35,19 @@ Proxy is a versatile AI project developed using Python, leveraging the power of 
 
 Based on the file listing, the repository has the following structure:
 
-proxy/├── .idea/                 # PyCharm project settings (IDE-specific)├── models/                # Directory for trained models│   ├── [mood_detection_model.h5] # Example:  Trained model for mood detection (if applicable)│   └── [text_generation_model.h5] # Example: Trained model for text generation (if applicable)├── venv/                   # Python virtual environment (dependencies)├── main.py                 # Main application entry point (likely orchestrates overall workflow)├── run_vision.py           # Script for running computer vision tasks (including mood detection)├── test_text.txt           # Example text file (likely for testing text generation)├── text_generation.py      # Script for character-level RNN text generation├── vision_ai.py            # Core computer vision AI logic (including mood detection)└── vision_dashboard.py     # Script for a vision-related dashboard or UI (if applicable)
+```
+proxy/
+├── .idea/                 # PyCharm project settings
+├── models/                # Directory for trained models
+├── venv/                  # Python virtual environment
+├── main.py                # Main application entry point
+├── run_vision.py          # Running computer vision tasks
+├── test_text.txt          # Text file testing text generation
+├── text_generation.py     # Character-level RNN text generation
+├── vision_ai.py           # Core computer vision AI logic
+└── vision_dashboard.py    # Vision-related dashboard or UI
+```
+
 ## Setup and Installation
 
 1.  **Clone the repository:**
